@@ -5,11 +5,5 @@
 /*.rbxlx.lock
 /*.rbxl.lock
 
-/Packages
-/sourcemap.json
-Packages/Fusion.lua
-Packages/Matter.lua
-Packages/ParallelWorker.lua
-Packages/PartCache.lua
-Packages/Spring.lua
+Packages
 sourcemap.json
