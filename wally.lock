@@ -30,7 +30,7 @@ dependencies = []
 [[package]]
 name = "rakha/actually-good-td"
 version = "0.1.0"
-dependencies = [["Fusion", "elttob/fusion@0.2.0"], ["Loader", "sleitnick/loader@2.0.0"], ["Matter", "evaera/matter@0.7.0"], ["ParallelWorker", "maximumadhd/parallel-worker@1.0.0"], ["PartCache", "aulkhami/partcache@4.0.2"], ["Spring", "murtlatif/spring@0.1.2"], ["TableUtil", "sleitnick/table-util@1.2.1"]]
+dependencies = [["Fusion", "elttob/fusion@0.2.0"], ["Immut", "solarhorizon/immut@0.4.4"], ["Loader", "sleitnick/loader@2.0.0"], ["Matter", "evaera/matter@0.7.0"], ["ParallelWorker", "maximumadhd/parallel-worker@1.0.0"], ["PartCache", "aulkhami/partcache@4.0.2"], ["Spring", "murtlatif/spring@0.1.2"], ["TableUtil", "sleitnick/table-util@1.2.1"]]
 
 [[package]]
 name = "roblox/testez"
@@ -45,4 +45,9 @@ dependencies = []
 [[package]]
 name = "sleitnick/table-util"
 version = "1.2.1"
+dependencies = []
+
+[[package]]
+name = "solarhorizon/immut"
+version = "0.4.4"
 dependencies = []
