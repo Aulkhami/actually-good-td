@@ -3,6 +3,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Matter = require(ReplicatedStorage.Packages.Matter)
+export type Component = typeof(Matter.component()())
 
 local Components = {}
 
