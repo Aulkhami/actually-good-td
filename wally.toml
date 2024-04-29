@@ -7,6 +7,7 @@ realm = "shared"
 [dependencies]
 Matter = "evaera/matter@0.7.0"
 Fusion = "elttob/fusion@0.2.0"
+Reflex = "littensy/reflex@4.3.1"
 ParallelWorker = "maximumadhd/parallel-worker@1.0.0"
 TableUtil = "sleitnick/table-util@1.2.1"
 Immut = "solarhorizon/immut@0.4.4"
