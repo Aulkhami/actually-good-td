@@ -11,8 +11,9 @@ export type MobsState = {
 }
 
 export type MobsActions = {
-	IncrementCurrent: () -> (),
-	IncrementCount: () -> (),
+	IncrementMobsCurrent: () -> (),
+	IncrementMobsCount: () -> (),
+	ResetMobsState: () -> (),
 	ResetState: () -> (),
 }
 
@@ -21,18 +22,25 @@ local initialState: MobsState = {
 	count = 0,
 }
 local mobsSlice: MobsProducer = Reflex.createProducer(initialState, {
-	IncrementCurrent = function(state: MobsState)
+	IncrementMobsCurrent = function(state: MobsState)
 		return Immut.produce(state, function(draft: MobsState)
 			draft.current += 1
 			return draft
 		end)
 	end,
-	IncrementCount = function(state: MobsState)
+	IncrementMobsCount = function(state: MobsState)
 		return Immut.produce(state, function(draft: MobsState)
 			draft.count += 1
 			return draft
 		end)
 	end,
+	ResetMobsState = function()
+		return {
+			current = 0,
+			count = 0,
+		} :: MobsState
+	end,
+
 	ResetState = function()
 		return {
 			current = 0,

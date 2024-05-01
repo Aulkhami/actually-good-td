@@ -9,12 +9,17 @@ export type WavesState = { Types.Wave }
 
 export type WavesActions = {
 	SetWaves: (waves: { Types.Wave }) -> (),
+	ResetState: () -> (),
 }
 
 local initialState: WavesState = {}
 local wavesSlice: WavesProducer = Reflex.createProducer(initialState, {
 	SetWaves = function(_: WavesState, waves: { Types.Wave })
 		return waves
+	end,
+
+	ResetState = function()
+		return {}
 	end,
 })
 
