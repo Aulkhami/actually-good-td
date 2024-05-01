@@ -9,6 +9,9 @@
       },
       "Shared": {
         "$path": "src/shared"
+      },
+      "Types": {
+        "$path": "src/types"
       }
     },
 
