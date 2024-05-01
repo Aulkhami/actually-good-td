@@ -1,15 +1,14 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
 
-local Matter = require(ReplicatedStorage.Packages.Matter)
-local Loader = require(ReplicatedStorage.Packages.Loader)
+local Store = require(script.Store)
+local Waves = require(script.Waves)
 
-local world = Matter.World.new()
+-- TEMPORARY
+Store.SetWaves(Waves("Normal"))
+Store.NextWave()
 
-local loop = Matter.Loop.new(world)
-local systems = Loader.LoadChildren(script.Systems)
-
-loop:scheduleSystems(systems)
-loop:begin({
-	default = RunService.Heartbeat,
+-- Start the game
+local Start = require(ReplicatedStorage.Shared.Start)
+Start({
+	script.Systems,
 })
