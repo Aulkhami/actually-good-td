@@ -25,6 +25,8 @@ local mobsSlice: MobsProducer = Reflex.createProducer(initialState, {
 	IncrementMobsCurrent = function(state: MobsState)
 		return Immut.produce(state, function(draft: MobsState)
 			draft.current += 1
+			draft.count = 0
+
 			return draft
 		end)
 	end,
