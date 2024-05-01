@@ -12,32 +12,6 @@ export type Component<T> = {
 
 local Components = {}
 
--- Wave
-type raw_Wave = {
-	current: number,
-}
-export type Wave = raw_Wave & Component<Wave>
-Components.Wave = Matter.component(
-	"Wave",
-	{
-		current = 1,
-	} :: raw_Wave
-)
-
--- WaveMobs
-type raw_WaveMobs = {
-	current: number,
-	count: number,
-}
-export type WaveMobs = raw_WaveMobs & Component<raw_WaveMobs>
-Components.WaveMobs = Matter.component(
-	"WaveMobs",
-	{
-		current = 0,
-		count = 0,
-	} :: raw_WaveMobs
-)
-
 -- Health
 type raw_Health = {
 	current: number,
