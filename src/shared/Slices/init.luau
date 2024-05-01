@@ -11,6 +11,6 @@ export type SharedState = {
 
 export type SharedActions = wave.WaveActions
 
-return Reflex.combineProducers({
+return {
 	wave = wave,
-})
+}
