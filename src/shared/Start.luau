@@ -4,11 +4,17 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Matter = require(ReplicatedStorage.Packages.Matter)
 local Plasma = require(ReplicatedStorage.Packages.Plasma)
 local Rewire = require(ReplicatedStorage.Packages.Rewire)
+local Types = require(ReplicatedStorage.Types)
 local HotReloader = Rewire.HotReloader
 
 local function start(containers)
 	local world = Matter.World.new()
-	local state = {}
+	local state: Types.GlobalState = {
+		debugEnabled = false,
+		gameStateUiState = {
+			displayed = table.create(5),
+		},
+	}
 
 	local debugger = Matter.Debugger.new(Plasma)
 

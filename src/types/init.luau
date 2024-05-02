@@ -13,4 +13,13 @@ export type Wave = {
 	waveStall: number?,
 }
 
+export type GameStateUiState = {
+	displayed: { number },
+}
+
+export type GlobalState = {
+	gameStateUiState: GameStateUiState,
+	debugEnabled: boolean,
+}
+
 return {}
