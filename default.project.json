@@ -10,6 +10,9 @@
       "Shared": {
         "$path": "src/shared"
       },
+      "Utility": {
+        "$path": "src/utility"
+      },
       "Types": {
         "$path": "src/types"
       }
