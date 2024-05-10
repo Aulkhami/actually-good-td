@@ -7,6 +7,8 @@ export type Mob = {
 	Description: string,
 }
 
+export type Path = { Vector3 }
+
 export type Wave = {
 	mobs: { { mob: Mob, count: number, spawnDelay: number? } },
 	spawnDelay: number,
