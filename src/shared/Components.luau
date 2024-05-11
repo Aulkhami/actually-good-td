@@ -3,7 +3,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Matter = require(ReplicatedStorage.Packages.Matter)
-local Types = require(ReplicatedStorage.Types)
 
 type PartialNewData<T> = { [any]: any } & T
 
@@ -44,25 +43,17 @@ export type Mob = {}
 Components.Mob = Matter.component("Mob", {} :: Mob)
 
 -- Path
-type raw_Path = Types.Path
+type raw_Path = {
+	current: number,
+	path: number,
+}
 export type Path = raw_Path & Component<raw_Path>
 Components.Path = Matter.component(
 	"Path",
 	{
-		Vector3.zero,
-	} :: raw_Path
-)
-
--- PathCurrent
-type raw_PathCurrent = {
-	current: number,
-}
-export type PathCurrent = raw_PathCurrent & Component<raw_PathCurrent>
-Components.PathCurrent = Matter.component(
-	"PathCurrent",
-	{
 		current = 1,
-	} :: raw_PathCurrent
+		path = 1,
+	} :: raw_Path
 )
 
 -- Speed

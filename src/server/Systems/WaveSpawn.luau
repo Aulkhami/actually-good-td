@@ -13,7 +13,6 @@ local Mob = Components.Mob
 local Health = Components.Health
 local Position = Components.Position
 local Path = Components.Path
-local PathCurrent = Components.PathCurrent
 local Speed = Components.Speed
 
 local function WaveSpawn(world: Matter.World)
@@ -48,6 +47,8 @@ local function WaveSpawn(world: Matter.World)
 	local mob = currentMob.mob
 	local mobStats = mob.Stats
 
+	local path = Store:getState(Selectors.SelectMapPath(currentMob.path or 1))
+
 	world:spawn(
 		Mob(),
 		Health({
@@ -55,12 +56,12 @@ local function WaveSpawn(world: Matter.World)
 			max = mobStats.Health,
 		} :: Components.Health),
 		Position({
-			-- TODO: add spawn position from map state
+			position = CFrame.new(path[1]),
 		} :: Components.Position),
 		Path({
-			-- TODO: get path from map state
+			path = currentMob.path or 1,
+			current = 1,
 		} :: Components.Path),
-		PathCurrent(),
 		Speed({
 			speed = mobStats.Speed,
 			baseSpeed = mobStats.Speed,
