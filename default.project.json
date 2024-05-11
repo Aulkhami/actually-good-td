@@ -15,6 +15,10 @@
       },
       "Types": {
         "$path": "src/types"
+      },
+
+      "MatterRemote": {
+        "$className": "RemoteEvent"
       }
     },
 
