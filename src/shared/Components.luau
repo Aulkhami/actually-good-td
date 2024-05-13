@@ -12,6 +12,18 @@ export type Component<T> = {
 
 local Components = {}
 
+-- Name
+type raw_Name = {
+	name: string,
+}
+export type Name = raw_Name & Component<raw_Name>
+Components.Name = Matter.component(
+	"Name",
+	{
+		name = "Bob",
+	} :: Name
+)
+
 -- Health
 type raw_Health = {
 	current: number,
