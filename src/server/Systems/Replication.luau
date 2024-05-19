@@ -11,6 +11,7 @@ local REPLICATED_COMPONENTS = {
 	"Health",
 	"Position",
 	"Mob",
+	"Name",
 	"Speed",
 }
 local replicatedComponents: { [Components.Component<any>]: boolean } = {}
