@@ -10,6 +10,11 @@ export type Component<T> = {
 	patch: (self: T, partialNewData: PartialNewData<T>) -> T & Component<T>,
 }
 
+export type Record<T> = {
+	old: T?,
+	new: T?,
+}
+
 local Components = {}
 
 -- Name
@@ -22,6 +27,18 @@ Components.Name = Matter.component(
 	{
 		name = "Bob",
 	} :: Name
+)
+
+-- Model
+type raw_Model = {
+	model: Model,
+}
+export type ModelComp = raw_Model & Component<raw_Model>
+Components.Model = Matter.component(
+	"Model",
+	{
+		model = Instance.new("Model"),
+	} :: raw_Model
 )
 
 -- Health
@@ -50,6 +67,22 @@ Components.Position = Matter.component(
 	} :: raw_Position
 )
 
+-- PositionOffset
+type raw_PositionOffset = {
+	up: number,
+	look: number,
+	right: number,
+}
+export type PositionOffset = raw_PositionOffset & Component<raw_PositionOffset>
+Components.PositionOffset = Matter.component(
+	"PositionOffset",
+	{
+		up = 0,
+		look = 0,
+		right = 0,
+	} :: PositionOffset
+)
+
 -- Mob
 export type Mob = {}
 Components.Mob = Matter.component("Mob", {} :: Mob)
@@ -67,6 +100,16 @@ Components.Path = Matter.component(
 		path = 1,
 	} :: raw_Path
 )
+
+-- PathBlocked
+type raw_PathBlocked = {}
+export type PathBlocked = raw_PathBlocked & Component<raw_PathBlocked>
+Components.PathBlocked = Matter.component("PathBlocked", {} :: PathBlocked)
+
+-- PathFinished
+type raw_PathFinished = {}
+export type PathFinished = raw_PathFinished & Component<raw_PathFinished>
+Components.PathFinished = Matter.component("PathFinished", {} :: PathFinished)
 
 -- Speed
 type raw_Speed = {
