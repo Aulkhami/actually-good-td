@@ -7,3 +7,5 @@
 
 Packages
 sourcemap.json
+src/client/Systems/TempVisualization.luau
+src/server/Systems/Sickness.luau
