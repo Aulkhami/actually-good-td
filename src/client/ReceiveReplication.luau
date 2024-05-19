@@ -9,17 +9,23 @@ local RemoteEvent = ReplicatedStorage.MatterRemote
 local function deserializeComponent(componentName: string, serializedComponent: { [any]: string }): { [any]: any }
 	if Sift.Array.is(serializedComponent) then
 		local dataType = typeof(Components[componentName]()[1])
+		if dataType == "string" then
+			return serializedComponent
+		end
 
 		return Sift.Array.map(serializedComponent, function(value: string)
-			return Squash[dataType].des(value) :: string
+			return Squash[dataType].des(value)
 		end)
 	else
 		local component: Components.Component<any> = Components[componentName]()
 
 		return Sift.Dictionary.map(serializedComponent, function(value: string, key)
 			local dataType = typeof(component[key])
+			if dataType == "string" then
+				return value
+			end
 
-			return Squash[dataType].des(value) :: string
+			return Squash[dataType].des(value)
 		end)
 	end
 end
