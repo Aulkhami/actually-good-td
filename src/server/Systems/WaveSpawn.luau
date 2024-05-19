@@ -10,8 +10,10 @@ local Selectors = require(ReplicatedStorage.Shared.Selectors)
 
 local Components = require(ReplicatedStorage.Shared.Components)
 local Mob = Components.Mob
+local Name = Components.Name
 local Health = Components.Health
 local Position = Components.Position
+local PositionOffset = Components.PositionOffset
 local Path = Components.Path
 local Speed = Components.Speed
 
@@ -48,16 +50,25 @@ local function WaveSpawn(world: Matter.World)
 	local mobStats = mob.Stats
 
 	local path = Store:getState(Selectors.SelectMapPath(currentMob.path or 1))
+	local position = CFrame.lookAt(path[1], path[2])
+	local rightOffset = (math.random() - 0.5) * 3 -- TODO: REPLACE WITH MAP GLOBAL STATE
+	position = position + (position.RightVector * rightOffset)
 
 	world:spawn(
 		Mob(),
+		Name({
+			name = mob.Name,
+		} :: Components.Name),
 		Health({
 			current = mobStats.Health,
 			max = mobStats.Health,
 		} :: Components.Health),
 		Position({
-			position = CFrame.new(path[1]),
+			position = position,
 		} :: Components.Position),
+		PositionOffset({
+			right = rightOffset,
+		} :: Components.PositionOffset),
 		Path({
 			path = currentMob.path or 1,
 			current = 1,
