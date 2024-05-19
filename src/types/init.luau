@@ -1,4 +1,5 @@
 export type Mob = {
+	Name: string,
 	Stats: {
 		Health: number,
 		Speed: number,
@@ -29,6 +30,28 @@ export type GameStateUiState = {
 export type GlobalState = {
 	gameStateUiState: GameStateUiState,
 	debugEnabled: boolean,
+}
+
+export type HumanoidlessCharacter = Model & {
+	Head: BasePart,
+	HumanoidRootPart: BasePart & {
+		["RootJoint"]: Motor6D,
+	},
+	Torso: BasePart & {
+		["Neck"]: Motor6D,
+		["Right Shoulder"]: Motor6D,
+		["Left Shoulder"]: Motor6D,
+		["Right Hip"]: Motor6D,
+		["Left Hip"]: Motor6D,
+	},
+	["Left Arm"]: BasePart,
+	["Right Arm"]: BasePart,
+	["Left Leg"]: BasePart,
+	["Right Leg"]: BasePart,
+
+	AnimationController: AnimationController & {
+		Animator: Animator,
+	},
 }
 
 return {}
