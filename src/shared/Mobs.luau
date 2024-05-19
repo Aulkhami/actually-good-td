@@ -5,9 +5,10 @@ local Types = require(ReplicatedStorage.Types)
 
 return {
 	Basic = {
+		Name = "Basic",
 		Stats = {
 			Health = 100,
-			Speed = 8,
+			Speed = 6,
 		},
 		Components = function()
 			return {}
