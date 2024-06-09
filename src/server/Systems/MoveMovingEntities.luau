@@ -84,7 +84,10 @@ local function MoveMovingEntities(world: Matter.World)
 			end
 
 			newPosition = newPosition:patch({
-				position = CFrame.lookAt(newPosition.position.Position, currentWaypoint),
+				position = CFrame.lookAt(
+					newPosition.position.Position,
+					Vector3.new(currentWaypoint.X, newPosition.position.Position.Y, currentWaypoint.Z)
+				),
 			})
 		end
 
