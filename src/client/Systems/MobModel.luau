@@ -22,7 +22,7 @@ local function MobModel(world: Matter.World)
 
 		local root = model.HumanoidRootPart
 		local rightLeg = model["Right Leg"]
-		local upOffset = root.Size.Y + rightLeg.Size.Y + 0.5 --TODO FUCKING CHANGE THIS
+		local upOffset = ((root.Size.Y + rightLeg.Size.Y) * model:GetScale()) + 0.05
 
 		root.CFrame = position.position + (position.position.UpVector * upOffset)
 		model.Parent = Workspace
