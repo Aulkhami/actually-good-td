@@ -28,4 +28,8 @@ function Selectors.SelectMapPath(path: number)
 	end
 end
 
+function Selectors.SelectPathWidth(state: Slices.SharedState)
+	return state.map.pathWidth
+end
+
 return Selectors

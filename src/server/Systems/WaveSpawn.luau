@@ -51,7 +51,7 @@ local function WaveSpawn(world: Matter.World)
 
 	local path = Store:getState(Selectors.SelectMapPath(currentMob.path or 1))
 	local position = CFrame.lookAt(path[1], path[2])
-	local rightOffset = (math.random() - 0.5) * 3 -- TODO: REPLACE WITH MAP GLOBAL STATE
+	local rightOffset = (math.random() - 0.5) * Store:getState(Selectors.SelectPathWidth)
 	position = position + (position.RightVector * rightOffset)
 
 	world:spawn(
