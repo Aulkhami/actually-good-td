@@ -34,11 +34,14 @@ local function getSubjectiveWaypoint(pathArray: Types.Path, path: Components.Pat
 	local currentRightVector = lastToCurrent.RightVector
 
 	if not nextWaypoint then
-		return currentWaypoint - (currentRightVector * rightOffset)
+		return currentWaypoint + (currentRightVector * rightOffset)
 	end
 
 	local nextLookVector = CFrame.lookAt(currentWaypoint, nextWaypoint).LookVector
-	local turnAngle = math.acos(currentLookVector:Dot(nextLookVector))
+	local turnAngle = math.atan2(
+		(nextLookVector.Z * currentLookVector.X) - (nextLookVector.X * currentLookVector.Z),
+		(nextLookVector.X * currentLookVector.X) + (nextLookVector.Z * currentLookVector.Z)
+	)
 
 	return currentWaypoint
 		+ (currentRightVector * rightOffset)
