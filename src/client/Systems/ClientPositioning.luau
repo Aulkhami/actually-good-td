@@ -27,7 +27,7 @@ local function ClientPositioning(world: Matter.World)
 					position = record.new.position,
 				} :: Components.ClientPosition)
 			)
-		elseif record.old then
+		elseif record.old and world:contains(id) then
 			world:remove(id, ClientPosition)
 		end
 	end

@@ -83,6 +83,18 @@ Components.PositionOffset = Matter.component(
 	} :: PositionOffset
 )
 
+-- ClientPosition
+type raw_ClientPosition = {
+	position: CFrame,
+}
+export type ClientPosition = raw_ClientPosition & Component<raw_ClientPosition>
+Components.ClientPosition = Matter.component(
+	"ClientPosition",
+	{
+		position = CFrame.identity,
+	} :: ClientPosition
+)
+
 -- Mob
 export type Mob = {}
 Components.Mob = Matter.component("Mob", {} :: Mob)

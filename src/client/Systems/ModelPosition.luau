@@ -11,10 +11,10 @@ local EnumList = require(ReplicatedStorage.Types.EnumList)
 
 local function ModelPosition(world: Matter.World)
 	for id: number, record: Components.Record<Components.ClientPosition> in world:queryChanged(ClientPosition) do
-		if not record.new then
+		local position = record.new
+		if not position then
 			continue
 		end
-		local position = record.new
 
 		local model: Components.ModelComp? = world:get(id, Model)
 		if not model then
