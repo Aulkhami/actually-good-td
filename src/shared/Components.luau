@@ -6,6 +6,8 @@ local Matter = require(ReplicatedStorage.Packages.Matter)
 
 type PartialNewData<T> = { [any]: any } & T
 
+type Constructor<T> = (data: PartialNewData<T>) -> Component<T>
+
 export type Component<T> = {
 	patch: (self: T, partialNewData: PartialNewData<T>) -> T & Component<T>,
 }
@@ -27,7 +29,7 @@ Components.Name = Matter.component(
 	{
 		name = "Bob",
 	} :: Name
-)
+) :: Constructor<raw_Name>
 
 -- Model
 type raw_Model = {
@@ -39,7 +41,7 @@ Components.Model = Matter.component(
 	{
 		model = Instance.new("Model"),
 	} :: raw_Model
-)
+) :: Constructor<raw_Model>
 
 -- Health
 type raw_Health = {
@@ -53,7 +55,7 @@ Components.Health = Matter.component(
 		current = 100,
 		max = 100,
 	} :: raw_Health
-)
+) :: Constructor<raw_Health>
 
 -- Position
 type raw_Position = {
@@ -65,7 +67,7 @@ Components.Position = Matter.component(
 	{
 		position = CFrame.identity,
 	} :: raw_Position
-)
+) :: Constructor<raw_Position>
 
 -- PositionOffset
 type raw_PositionOffset = {
@@ -81,7 +83,7 @@ Components.PositionOffset = Matter.component(
 		look = 0,
 		right = 0,
 	} :: PositionOffset
-)
+) :: Constructor<raw_PositionOffset>
 
 -- ClientPosition
 type raw_ClientPosition = {
@@ -93,7 +95,7 @@ Components.ClientPosition = Matter.component(
 	{
 		position = CFrame.identity,
 	} :: ClientPosition
-)
+) :: Constructor<raw_ClientPosition>
 
 -- Mob
 export type Mob = {}
@@ -111,7 +113,7 @@ Components.Path = Matter.component(
 		current = 1,
 		path = 1,
 	} :: raw_Path
-)
+) :: Constructor<raw_Path>
 
 -- PathBlocked
 type raw_PathBlocked = {}
@@ -135,6 +137,6 @@ Components.Speed = Matter.component(
 		baseSpeed = 4,
 		speed = 4,
 	} :: Speed
-)
+) :: Constructor<raw_Speed>
 
 return Components
