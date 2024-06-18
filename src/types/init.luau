@@ -1,13 +1,35 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Matter = require(ReplicatedStorage.Packages.Matter)
+
+-- Mobs
 export type Mob = {
 	Name: string,
-	Stats: {
-		Health: number,
-		Speed: number,
-	},
-	Components: () -> { { [string]: any } },
 	Description: string,
+
+	Components: () -> { { [string]: any } },
 }
 
+-- Towers
+export type Tower = {
+	Name: string,
+	Description: string,
+
+	Components: () -> { { [string]: any } },
+
+	Cost: number,
+	UpgradePath: {
+		{
+			{
+				Cost: number,
+				Insert: (world: Matter.World, id: number) -> { { [string]: any } },
+				Remove: (world: Matter.World, id: number) -> { { [string]: any } },
+			}
+		}
+	},
+}
+
+-- Map
 export type Path = { Vector3 }
 
 export type Wave = {
@@ -23,6 +45,7 @@ export type Wave = {
 	waveStall: number?,
 }
 
+-- Global states
 export type GameStateUiState = {
 	displayed: { number },
 }
@@ -32,6 +55,7 @@ export type GlobalState = {
 	debugEnabled: boolean,
 }
 
+-- Instance types
 export type HumanoidlessCharacter = Model & {
 	Head: BasePart,
 	HumanoidRootPart: BasePart & {

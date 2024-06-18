@@ -11,11 +11,9 @@ local Selectors = require(ReplicatedStorage.Shared.Selectors)
 local Components = require(ReplicatedStorage.Shared.Components)
 local Mob = Components.Mob
 local Name = Components.Name
-local Health = Components.Health
 local Position = Components.Position
 local PositionOffset = Components.PositionOffset
 local Path = Components.Path
-local Speed = Components.Speed
 
 local function WaveSpawn(world: Matter.World)
 	local waveState = Store:getState(Selectors.SelectCurrentWave)
@@ -47,7 +45,6 @@ local function WaveSpawn(world: Matter.World)
 	Store.IncrementMobsCount()
 
 	local mob = currentMob.mob
-	local mobStats = mob.Stats
 
 	local path = Store:getState(Selectors.SelectMapPath(currentMob.path or 1))
 	local position = CFrame.lookAt(path[1], path[2])
@@ -59,10 +56,6 @@ local function WaveSpawn(world: Matter.World)
 		Name({
 			name = mob.Name,
 		} :: Components.Name),
-		Health({
-			current = mobStats.Health,
-			max = mobStats.Health,
-		} :: Components.Health),
 		Position({
 			position = position,
 		} :: Components.Position),
@@ -73,10 +66,6 @@ local function WaveSpawn(world: Matter.World)
 			path = currentMob.path or 1,
 			current = 1,
 		} :: Components.Path),
-		Speed({
-			speed = mobStats.Speed,
-			baseSpeed = mobStats.Speed,
-		} :: Components.Speed),
 		table.unpack(mob.Components())
 	)
 end
