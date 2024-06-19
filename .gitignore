@@ -5,7 +5,11 @@
 /*.rbxlx.lock
 /*.rbxl.lock
 
+# Generated files
 Packages
 sourcemap.json
+src/network/*.luau
+
+# Random temporary scripts
 src/client/Systems/TempVisualization.luau
 src/server/Systems/Sickness.luau
