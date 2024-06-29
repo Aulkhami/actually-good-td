@@ -11,6 +11,20 @@ export type Mob = {
 }
 
 -- Towers
+export type Upgrade = {
+	Id: number,
+	Name: string,
+	Cost: number,
+	Insert: (world: Matter.World, id: number) -> { { [string]: any } },
+	Remove: (world: Matter.World, id: number) -> { { [string]: any } },
+}
+
+export type UpgradePath = {
+	Id: number,
+	Name: string,
+	Upgrades: { Upgrade },
+}
+
 export type Tower = {
 	Name: string,
 	Description: string,
@@ -18,15 +32,7 @@ export type Tower = {
 	Components: () -> { { [string]: any } },
 
 	Cost: number,
-	UpgradePath: {
-		{
-			{
-				Cost: number,
-				Insert: (world: Matter.World, id: number) -> { { [string]: any } },
-				Remove: (world: Matter.World, id: number) -> { { [string]: any } },
-			}
-		}
-	},
+	UpgradePath: { UpgradePath },
 }
 
 -- Map

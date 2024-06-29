@@ -5,4 +5,11 @@ return {
 		Modification = 100 ^ 2,
 		Misc = 100 ^ 3,
 	},
+
+	ZIndex = {
+		Top = 1000,
+		Middle = 500,
+		Bottom = 0,
+		Under = -500,
+	},
 }
