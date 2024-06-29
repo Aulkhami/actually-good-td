@@ -139,4 +139,8 @@ Components.Speed = Matter.component(
 	} :: Speed
 ) :: Constructor<raw_Speed>
 
+-- Tower
+export type Tower = {}
+Components.Tower = Matter.component("Tower", {} :: Tower)
+
 return Components
