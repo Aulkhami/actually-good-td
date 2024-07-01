@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Matter = require(ReplicatedStorage.Packages.Matter)
 local Plasma = require(ReplicatedStorage.Packages.Plasma)
 local Rewire = require(ReplicatedStorage.Packages.Rewire)
+local Signal = require(ReplicatedStorage.Packages.Signal)
 local Types = require(ReplicatedStorage.Types)
 local HotReloader = Rewire.HotReloader
 
@@ -80,14 +81,21 @@ local function start(containers)
 
 	debugger:autoInitialize(loop)
 
-	-- Begin running our systems
-
-	loop:begin({
+	-- Event tables
+	local events = {
 		default = RunService.Heartbeat,
 		Stepped = RunService.Stepped,
-	})
+	}
 
 	if RunService:IsClient() then
+		-- Additional events for the client
+		local postInput = Signal()
+		RunService:BindToRenderStep("PostInput", Enum.RenderPriority.Input.Value + 1, function()
+			postInput:Fire()
+		end)
+		events.PostInput = postInput
+
+		-- Debug UI toggle
 		UserInputService.InputBegan:Connect(function(input)
 			if input.KeyCode == Enum.KeyCode.F4 then
 				debugger:toggle()
@@ -96,6 +104,9 @@ local function start(containers)
 			end
 		end)
 	end
+
+	-- Begin running our systems
+	loop:begin(events)
 
 	return world, state
 end
