@@ -18,15 +18,15 @@ return function(widget: Frame)
 		},
 		{
 			Name = "AttackInterval",
-			Value = Value(100),
+			Value = Value(0.5),
 		},
 		{
 			Name = "Defense",
-			Value = Value(100),
+			Value = Value(0),
 		},
 		{
 			Name = "Range",
-			Value = Value(100),
+			Value = Value(50),
 		},
 	} :: { TowerDetailsState.Stats })
 	state.UpgradeStatus = {

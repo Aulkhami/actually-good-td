@@ -329,7 +329,13 @@ local function TowerStats(props: {
 					TextSize = 14,
 					TextColor3 = Color3.fromHex(Theme.color.text),
 
-					Text = stat.Value,
+					Text = Computed(function()
+						if string.find(stat.Name, "Interval") then
+							return `{stat.Value:get()} s`
+						end
+
+						return tostring(stat.Value:get())
+					end),
 				} :: any & TextLabel),
 			},
 		} :: any & Frame)
