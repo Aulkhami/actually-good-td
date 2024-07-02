@@ -17,7 +17,7 @@ return function(widget: Frame)
 			Value = Value(100),
 		},
 		{
-			Name = "AttackSpeed",
+			Name = "AttackInterval",
 			Value = Value(100),
 		},
 		{
