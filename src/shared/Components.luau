@@ -3,6 +3,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Matter = require(ReplicatedStorage.Packages.Matter)
+local Types = require(ReplicatedStorage.Types)
 
 type PartialNewData<T> = { [any]: any } & T
 
@@ -142,5 +143,80 @@ Components.Speed = Matter.component(
 -- Tower
 export type Tower = {}
 Components.Tower = Matter.component("Tower", {} :: Tower)
+
+-- Attack
+type raw_Attack = {
+	attack: number,
+}
+export type Attack = raw_Attack & Component<raw_Attack>
+Components.Attack = Matter.component(
+	"Attack",
+	{
+		attack = 20,
+	} :: Attack
+) :: Constructor<raw_Attack>
+
+-- AttackInterval
+type raw_AttackInterval = {
+	interval: number,
+}
+export type AttackInterval = raw_AttackInterval & Component<raw_AttackInterval>
+Components.AttackInterval = Matter.component(
+	"AttackInterval",
+	{
+		interval = 1,
+	} :: AttackInterval
+) :: Constructor<raw_AttackInterval>
+
+-- Range
+type raw_Range = {
+	range: number,
+}
+export type Range = raw_Range & Component<raw_Range>
+Components.Range = Matter.component(
+	"Range",
+	{
+		range = 15,
+	} :: Range
+) :: Constructor<raw_Range>
+
+-- Defense
+type raw_Defense = {
+	defense: number,
+}
+export type Defense = raw_Defense & Component<raw_Defense>
+Components.Defense = Matter.component(
+	"Defense",
+	{
+		defense = 0,
+	} :: Defense
+) :: Constructor<raw_Defense>
+
+-- Size
+type raw_Size = {
+	size: number,
+}
+export type Size = raw_Size & Component<raw_Size>
+Components.Size = Matter.component(
+	"Size",
+	{
+		size = 5,
+	} :: Size
+) :: Constructor<raw_Size>
+
+-- GhostPlacement
+export type GhostPlacement = {}
+Components.GhostPlacement = Matter.component("GhostPlacement", {} :: GhostPlacement)
+
+-- Highlight
+type raw_Highlight = {
+	part: Types.HighlightPart,
+}
+export type Highlight = raw_Highlight & Component<raw_Highlight>
+Components.Highlight = Matter.component("Highlight", {} :: Highlight) :: Constructor<raw_Highlight>
+
+-- Selected
+export type Selected = {}
+Components.Selected = Matter.component("Selected", {} :: Selected)
 
 return Components
