@@ -25,7 +25,7 @@ local towers: { [string]: Types.Tower } = {
 		UpgradePath = {
 			{
 				Id = 1,
-				Name = "Reconnaissance",
+				Name = "Recon",
 				Upgrades = {
 					{
 						Id = 1,
@@ -86,7 +86,7 @@ local towers: { [string]: Types.Tower } = {
 			},
 			{
 				Id = 2,
-				Name = "Vanguard Unit",
+				Name = "Vanguard",
 				Upgrades = {
 					{
 						Id = 1,
