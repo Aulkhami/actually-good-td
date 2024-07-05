@@ -5,7 +5,7 @@ opt client_output = './Client.luau'
 type Tower = struct {
 	Name: string(3..20),
 	UpgradePath: u8(0..5)[3],
-	Position: Vector3,
+	Position: CFrame,
 }
 
 funct PlaceTowers = {
