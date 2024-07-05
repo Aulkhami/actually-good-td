@@ -11,6 +11,8 @@ export type Mob = {
 }
 
 -- Towers
+export type PlacementArea = "PlacementGround" | "PlacementHigh" | "PlacementPath"
+
 export type Upgrade = {
 	Id: number,
 	Name: string,
@@ -28,6 +30,8 @@ export type UpgradePath = {
 export type Tower = {
 	Name: string,
 	Description: string,
+
+	PlacementArea: PlacementArea,
 
 	Components: () -> { { [string]: any } },
 
@@ -82,6 +86,21 @@ export type HumanoidlessCharacter = Model & {
 	AnimationController: AnimationController & {
 		Animator: Animator,
 	},
+}
+
+export type TowerModel = Folder & {
+	Base: HumanoidlessCharacter,
+	Upgrades: Folder,
+}
+
+export type UpgradeAsset = Folder & {
+	Assemble: ModuleScript,
+}
+
+export type AssembleFunc = (character: HumanoidlessCharacter) -> ()
+
+export type HighlightPart = BasePart & {
+	Decal: Decal,
 }
 
 return {}

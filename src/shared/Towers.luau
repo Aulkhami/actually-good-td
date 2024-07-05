@@ -15,6 +15,8 @@ local towers: { [string]: Types.Tower } = {
 		Name = "Scout",
 		Description = "Scout TF2",
 
+		PlacementArea = "PlacementGround",
+
 		Components = function()
 			return {
 				Health({
