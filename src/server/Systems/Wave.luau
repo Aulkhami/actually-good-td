@@ -19,7 +19,6 @@ local function WaveSys(world: Matter.World)
 	local mobState = Store:getState(Selectors.SelectWaveMobState)
 
 	if not waveState then
-		print("Finished!")
 		-- TODO: actually do stuff
 		return
 	end

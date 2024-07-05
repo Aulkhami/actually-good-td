@@ -4,6 +4,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Sift = require(ReplicatedStorage.Packages.Sift)
 local Components = require(ReplicatedStorage.Shared.Components)
 local Health = Components.Health
+local Attack = Components.Attack
+local Range = Components.Range
+local Size = Components.Size
 
 local Types = require(ReplicatedStorage.Types)
 
@@ -17,6 +20,16 @@ local towers: { [string]: Types.Tower } = {
 				Health({
 					max = 100,
 					current = 100,
+				}),
+				Attack({
+					attack = 5,
+					interval = 0.5,
+				}),
+				Range({
+					range = 20,
+				}),
+				Size({
+					size = 3,
 				}),
 			}
 		end,

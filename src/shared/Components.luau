@@ -144,29 +144,31 @@ Components.Speed = Matter.component(
 export type Tower = {}
 Components.Tower = Matter.component("Tower", {} :: Tower)
 
+-- TowerUpgrades
+type raw_TowerUpgrades = { [number]: number }
+export type TowerUpgrades = raw_TowerUpgrades & Component<raw_TowerUpgrades>
+Components.TowerUpgrades = Matter.component(
+	"TowerUpgrades",
+	{
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+	} :: TowerUpgrades
+) :: Constructor<raw_TowerUpgrades>
+
 -- Attack
 type raw_Attack = {
 	attack: number,
+	interval: number,
 }
 export type Attack = raw_Attack & Component<raw_Attack>
 Components.Attack = Matter.component(
 	"Attack",
 	{
 		attack = 20,
+		interval = 1,
 	} :: Attack
 ) :: Constructor<raw_Attack>
-
--- AttackInterval
-type raw_AttackInterval = {
-	interval: number,
-}
-export type AttackInterval = raw_AttackInterval & Component<raw_AttackInterval>
-Components.AttackInterval = Matter.component(
-	"AttackInterval",
-	{
-		interval = 1,
-	} :: AttackInterval
-) :: Constructor<raw_AttackInterval>
 
 -- Range
 type raw_Range = {
@@ -207,6 +209,13 @@ Components.Size = Matter.component(
 -- GhostPlacement
 export type GhostPlacement = {}
 Components.GhostPlacement = Matter.component("GhostPlacement", {} :: GhostPlacement)
+
+-- RangeVisual
+type raw_RangeVisual = {
+	part: Types.HighlightPart,
+}
+export type RangeVisual = raw_RangeVisual & Component<raw_RangeVisual>
+Components.RangeVisual = Matter.component("RangeVisual", {} :: RangeVisual) :: Constructor<raw_RangeVisual>
 
 -- Highlight
 type raw_Highlight = {
