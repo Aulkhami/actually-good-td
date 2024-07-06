@@ -1,5 +1,7 @@
 opt server_output = './Server.luau'
 opt client_output = './Client.luau'
+opt async_lib = 'require(game:GetService("ReplicatedStorage").Future)'
+opt yield_type = 'future'
 
 -- Towers --
 type Tower = struct {
