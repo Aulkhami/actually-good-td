@@ -33,4 +33,6 @@ Workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(functio
 	state.ViewportSize:set(Workspace.CurrentCamera.ViewportSize)
 end)
 
+export type Type = typeof(state)
+
 return state
