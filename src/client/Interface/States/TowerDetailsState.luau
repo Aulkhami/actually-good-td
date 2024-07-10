@@ -37,7 +37,7 @@ return function(): TowerDetailsState
 	return {
 		Tower = Value(Towers["Scout"]),
 		UpgradeStatus = { {} },
-		PathStatus = {},
+		PathStatus = { Value("Primary"), Value("Primary"), Value("Primary"), Value("Primary"), Value("Primary") },
 
 		Stats = Value({}),
 		Health = {
