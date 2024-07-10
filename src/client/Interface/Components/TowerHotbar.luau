@@ -107,11 +107,15 @@ return function(props: Props)
 		return key,
 			TowerHotbarItem(Sift.Dictionary.merge(itemProps, {
 				OnClick = function()
-					local selected = props.State.SelectFn(itemProps.State)
-					if selected then
-						props.State.Selected:set(key)
-					elseif props.State.Selected:get() == key then
+					if props.State.Selected:get() == key then
 						props.State.Selected:set(false)
+						props.State.DeselectFn()
+
+						return
+					end
+
+					if props.State.SelectFn(itemProps.State) then
+						props.State.Selected:set(key)
 					end
 				end,
 			}))

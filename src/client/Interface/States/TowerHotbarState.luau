@@ -12,6 +12,7 @@ export type TowerHotbarState = {
 	Selected: Fusion.Value<number | false>,
 
 	SelectFn: (state: TowerButtonState.TowerButtonState) -> boolean,
+	DeselectFn: () -> (),
 }
 
 return function(): TowerHotbarState
@@ -24,5 +25,6 @@ return function(): TowerHotbarState
 		SelectFn = function()
 			return true
 		end,
+		DeselectFn = function() end,
 	}
 end
