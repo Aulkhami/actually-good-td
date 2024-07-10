@@ -21,6 +21,7 @@ local function Tween(part: Part, tweenInfo: TweenInfo, goal: { [any]: any })
 	local tween = TweenService:Create(part, tweenInfo, goal)
 	SurfaceGuiEffects.Tweens[part] = tween
 
+	tween:Play()
 	tween.Completed:Wait()
 
 	SurfaceGuiEffects.Tweens[part] = nil
@@ -29,12 +30,14 @@ end
 -- Highlight --
 -- The template, created using Fusion
 local highlightTemplate = New("Part")({
+	CanCollide = false,
+	Transparency = 1,
 	Shape = Enum.PartType.Cylinder,
-	CFrame = CFrame.fromOrientation(0, 90, 90),
-	Size = Vector3.new(0, 0.1, 0),
+	Size = Vector3.new(0.1, 3, 3),
 
 	[Children] = {
 		New("SurfaceGui")({
+			Face = Enum.NormalId.Right,
 			LightInfluence = 3,
 			ResetOnSpawn = false,
 
@@ -55,15 +58,14 @@ local highlightTweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum
 -- Get a new Highlight part
 function SurfaceGuiEffects.GetHighlight(position: Vector3, size: number)
 	local part = highlightParts:GetPart()
-	part.CFrame = part.CFrame + position
+	part.CFrame = CFrame.fromOrientation(0, 0, math.rad(90)) + position
 
 	Future.new(
 		Tween,
 		part,
 		highlightTweenInfo,
 		{
-			CFrame = CFrame.fromOrientation(0, 0, 90) + part.CFrame.Position,
-			Size = Vector3.new(size, 0.1, size),
+			Size = Vector3.new(0.1, size, size),
 		} :: any & Part
 	)
 
@@ -77,8 +79,7 @@ function SurfaceGuiEffects.ReturnHighlight(part: Part)
 		part,
 		highlightTweenInfo,
 		{
-			CFrame = CFrame.fromOrientation(0, 90, 90) + part.CFrame.Position,
-			Size = Vector3.new(0, 0.1, 0),
+			Size = Vector3.new(0.1, 0, 0),
 		} :: any & Part
 	):After(function()
 		highlightParts:ReturnPart(part)
@@ -88,12 +89,14 @@ end
 -- RangeVisual --
 -- The template, created using Fusion
 local rangeVisualTemplate = New("Part")({
+	CanCollide = false,
+	Transparency = 1,
 	Shape = Enum.PartType.Cylinder,
-	CFrame = CFrame.fromOrientation(0, 90, 90),
 	Size = Vector3.new(0, 0.1, 0),
 
 	[Children] = {
 		New("SurfaceGui")({
+			Face = Enum.NormalId.Right,
 			LightInfluence = 3,
 			ResetOnSpawn = false,
 
@@ -114,15 +117,14 @@ local rangeVisualTweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Exponential, En
 -- Get a new RangeVisual part
 function SurfaceGuiEffects.GetRangeVisual(position: Vector3, range: number)
 	local part = rangeVisualParts:GetPart()
-	part.CFrame = part.CFrame + position
+	part.CFrame = CFrame.fromOrientation(0, 0, math.rad(90)) + position
 
 	Future.new(
 		Tween,
 		part,
 		rangeVisualTweenInfo,
 		{
-			CFrame = CFrame.fromOrientation(0, 0, 90) + part.CFrame.Position,
-			Size = Vector3.new(range, 0.1, range),
+			Size = Vector3.new(0.1, range, range),
 		} :: any & Part
 	)
 
@@ -136,8 +138,7 @@ function SurfaceGuiEffects.ReturnRangeVisual(part: Part)
 		part,
 		highlightTweenInfo,
 		{
-			CFrame = CFrame.fromOrientation(0, 90, 90) + part.CFrame.Position,
-			Size = Vector3.new(0, 0.1, 0),
+			Size = Vector3.new(0.1, 0, 0),
 		} :: any & Part
 	):After(function()
 		rangeVisualParts:ReturnPart(part)
