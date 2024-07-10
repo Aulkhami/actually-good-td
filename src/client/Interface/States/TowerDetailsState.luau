@@ -36,7 +36,29 @@ export type TowerDetailsState = {
 return function(): TowerDetailsState
 	return {
 		Tower = Value(Towers["Scout"]),
-		UpgradeStatus = { {} },
+		UpgradeStatus = {
+			{
+				Value("None"),
+				Value("None"),
+				Value("None"),
+				Value("None"),
+				Value("None"),
+			},
+			{
+				Value("None"),
+				Value("None"),
+				Value("None"),
+				Value("None"),
+				Value("None"),
+			},
+			{
+				Value("None"),
+				Value("None"),
+				Value("None"),
+				Value("None"),
+				Value("None"),
+			},
+		},
 		PathStatus = { Value("Primary"), Value("Primary"), Value("Primary"), Value("Primary"), Value("Primary") },
 
 		Stats = Value({}),
