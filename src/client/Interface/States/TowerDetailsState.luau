@@ -3,6 +3,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Fusion = require(ReplicatedStorage.Packages.Fusion)
 local Value = Fusion.Value
 
+local Towers = require(ReplicatedStorage.Shared.Towers)
+
 local Types = require(ReplicatedStorage.Types)
 
 export type UpgradeStatus = Fusion.Value<"All" | "Some" | "None">
@@ -33,7 +35,7 @@ export type TowerDetailsState = {
 
 return function(): TowerDetailsState
 	return {
-		Tower = Value(),
+		Tower = Value(Towers["Scout"]),
 		UpgradeStatus = { {} },
 		PathStatus = {},
 
