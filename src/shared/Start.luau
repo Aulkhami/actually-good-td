@@ -95,6 +95,8 @@ local function start(containers)
 		end)
 		events.PostInput = postInput
 
+		events.RenderStepped = RunService.RenderStepped
+
 		-- Debug UI toggle
 		UserInputService.InputBegan:Connect(function(input)
 			if input.KeyCode == Enum.KeyCode.F4 then
