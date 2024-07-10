@@ -100,7 +100,7 @@ export type UpgradeAsset = Folder & {
 export type AssembleFunc = (character: HumanoidlessCharacter) -> ()
 
 export type HighlightPart = BasePart & {
-	Decal: Decal,
+	SurfaceGui: SurfaceGui,
 }
 
 return {}
