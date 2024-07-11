@@ -142,7 +142,7 @@ local function PlaceDownTower(world: Matter.World)
 
 		return {
 			Name = name.name,
-			UpgradePath = Sift.Array.copy(upgrades),
+			UpgradePath = Sift.Array.copy(upgrades.upgrades),
 			Position = position.position,
 		}
 	end)

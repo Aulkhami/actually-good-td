@@ -12,7 +12,9 @@ local Types = require(ReplicatedStorage.Types)
 local function SpawnTower(world: Matter.World, tower: Types.Tower, upgrades: { number })
 	local id: number = world:spawn(
 		Tower(),
-		TowerUpgrades(upgrades),
+		TowerUpgrades({
+			upgrades = upgrades,
+		}),
 		Name({
 			name = tower.Name,
 		}),

@@ -145,14 +145,16 @@ export type Tower = {}
 Components.Tower = Matter.component("Tower", {} :: Tower)
 
 -- TowerUpgrades
-type raw_TowerUpgrades = { [number]: number }
+type raw_TowerUpgrades = { upgrades: { [number]: number } }
 export type TowerUpgrades = raw_TowerUpgrades & Component<raw_TowerUpgrades>
 Components.TowerUpgrades = Matter.component(
 	"TowerUpgrades",
 	{
-		[1] = 0,
-		[2] = 0,
-		[3] = 0,
+		upgrades = {
+			[1] = 0,
+			[2] = 0,
+			[3] = 0,
+		},
 	} :: TowerUpgrades
 ) :: Constructor<raw_TowerUpgrades>
 
