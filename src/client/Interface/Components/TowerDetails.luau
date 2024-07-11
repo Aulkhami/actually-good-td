@@ -450,14 +450,14 @@ return function(props: Props)
 		BackgroundColor3 = Color3.fromHex(Theme.color.background_100),
 
 		Position = props.Position or UDim2.fromOffset(0, 0),
-		Size = props.Size or UDim2.fromOffset(500, 180),
+		Size = props.Size or UDim2.fromOffset(500, 185),
 		AnchorPoint = props.AnchorPoint or Vector2.zero,
 
 		[Children] = {
 			New("UIGradient")({
 				Transparency = NumberSequence.new({
-					NumberSequenceKeypoint.new(0, 0.25),
-					NumberSequenceKeypoint.new(0.5, 0.75),
+					NumberSequenceKeypoint.new(0, 0.1),
+					NumberSequenceKeypoint.new(0.8, 0.6),
 					NumberSequenceKeypoint.new(1, 1),
 				}),
 			} :: any & UIGradient),
@@ -466,7 +466,7 @@ return function(props: Props)
 			New("Frame")({
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 1),
-				Position = UDim2.fromOffset(0, 30),
+				Position = UDim2.fromOffset(0, 35),
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 
@@ -528,16 +528,16 @@ return function(props: Props)
 						Size = UDim2.new(UDim.new(1, 0), UDim.new(0, 25)),
 						AutomaticSize = Enum.AutomaticSize.Y,
 
-						BackgroundTransparency = 0.8,
+						BackgroundTransparency = 0.5,
 						TextColor3 = Color3.fromHex(Theme.color.text),
-						BackgroundColor3 = BrickColor.new("Dark grey").Color,
+						BackgroundColor3 = BrickColor.new("Silver").Color,
 						FontFace = Theme.font.heading,
 						TextSize = 15,
 						TextYAlignment = Enum.TextYAlignment.Center,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextWrapped = true,
 
-						Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+						Text = props.State.Tower:get().Description,
 
 						[Children] = {
 							New("UIPadding")({
