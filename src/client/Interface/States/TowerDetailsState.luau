@@ -59,7 +59,7 @@ return function(): TowerDetailsState
 				Value("None"),
 			},
 		},
-		PathStatus = { Value("Primary"), Value("Primary"), Value("Primary"), Value("Primary"), Value("Primary") },
+		PathStatus = { Value("Primary"), Value("Primary"), Value("Primary") },
 
 		Stats = Value({}),
 		Health = {
