@@ -1,7 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Server = require(ReplicatedStorage.Network.Server)
-local Future = require(ReplicatedStorage.Packages.Future)
 local Matter = require(ReplicatedStorage.Packages.Matter)
 local Signal = require(ReplicatedStorage.Packages.Signal)
 
@@ -18,18 +17,6 @@ Server.PlaceTowers.SetCallback(function(player: Player, towers: { Server.Tower }
 	PlaceTowerSignal:Fire(player, towers)
 
 	return "Success"
-end)
-
--- TEMPORARY TEST, PLEASE FUCKING REMOVE LATER
-Future.new(function()
-	task.wait(20)
-	PlaceTowerSignal:Fire(game:GetService("Players")["Rakha2828"], {
-		{
-			Name = "Scout",
-			Position = Vector3.new(-110, 1.2, -110),
-			UpgradePath = { 0, 0, 0 },
-		},
-	})
 end)
 
 local function PlaceTower(world: Matter.World)
