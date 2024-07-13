@@ -41,4 +41,5 @@ end
 return {
 	system = ModelPosition,
 	priority = EnumList.Priority.Misc,
+	event = "RenderStepped",
 }

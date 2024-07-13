@@ -36,4 +36,5 @@ end
 return {
 	system = ClientPositioning,
 	priority = EnumList.Priority.Creation,
+	event = "RenderStepped",
 }
