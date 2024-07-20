@@ -14,6 +14,8 @@ local REPLICATED_COMPONENTS = {
 	"Name",
 	"Speed",
 	"Tower",
+	"TowerUpgrades",
+	"Size",
 }
 local replicatedComponents: { [Components.Component<any>]: boolean } = {}
 
