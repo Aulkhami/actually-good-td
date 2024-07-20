@@ -73,12 +73,15 @@ end
 function QuadTree.GetNode(self: Class, node: Node, index1: number, index2: number)
 	local branch = node.branch
 	if not branch then
+		-- Create the branch
 		branch = { {}, {} }
 		node.branch = branch
 	end
 
 	local newNode = branch[index1][index2]
 	if not newNode then
+		-- Create a new node branch under the node parameter
+		-- with its topLeft and bottomLeft according to its indexes
 		local topLeft = node.topLeft
 		local bottomRight = node.bottomRight
 
@@ -125,6 +128,7 @@ function QuadTree.DestroyNode(self: Class, node: Node)
 		return
 	end
 
+	-- Check if the parent is empty by going through all of its branch nodes
 	local parentEmpty = true
 	for index1, row in parent.branch do
 		for index2, child in row do
@@ -136,6 +140,7 @@ function QuadTree.DestroyNode(self: Class, node: Node)
 		end
 	end
 
+	-- The tree now has 1 less nodes
 	self.sizeNodes -= 1
 
 	if parentEmpty then
@@ -146,14 +151,24 @@ end
 function QuadTree.Insert(self: Class, point: Point, _node: Node?): Node?
 	local node = _node or self.tree
 	if not self:InBoundary(point.position, node) then
+		-- The point isn't inside the node, so don't bother
 		return
 	end
 
-	local reference: { number } = self.references[point.id] or table.create(self._maxDepth + 1)
+	-- Get or create the reference of the point
+	-- The reference table here is created with the preallocated space of (maxDepth * 2) + 1
+	-- due to it needing 2 indexes per branch and an additional 1
+	-- to find its position in the bottom-most Node's Points table
+	local reference: { number } = self.references[point.id] or table.create((self._maxDepth * 2) + 1)
 	self.references[point.id] = reference
 
 	if node.points then
+		-- It means this Node is the current bottom-most Node
 		if (#node.points >= self._maxPoints) and (node.depth < self._maxDepth) then
+			-- If the Node has more points than the maximum points allowed,
+			-- and it still isn't below the maximum depth:
+			-- Branch out the Node by re-inserting the points that were inside of it
+
 			local points = table.clone(node.points) :: { Point }
 			node.points = nil
 
@@ -164,8 +179,10 @@ function QuadTree.Insert(self: Class, point: Point, _node: Node?): Node?
 				self:Insert(_point, node)
 			end
 
+			-- Insert the point that we were going to insert, too
 			return self:Insert(point, node)
 		else
+			-- Simply insert the point into the node.points table
 			table.insert(node.points, point)
 			table.insert(reference, #node.points)
 
@@ -175,6 +192,7 @@ function QuadTree.Insert(self: Class, point: Point, _node: Node?): Node?
 		end
 	end
 
+	-- This Node has branches, figure out which branch should the Point be placed in
 	local p = point.position
 	local newNode: Node
 	if isInLeftHalf(p, node) then
@@ -209,24 +227,26 @@ function QuadTree.Remove(self: Class, id: string, _node: Node?)
 	end
 
 	local node: Node = _node or self:GetFromId(id)
-	if not node then
-		return
-	end
+	-- For Type safety
 	if not node.points then
 		return
 	end
 
+	-- Remove the Point from the reference table
 	table.remove(node.points, reference[#reference])
 	self.references[id] = nil
 
+	-- The tree now has 1 less points
 	self.sizePoints -= 1
 
 	if not Sift.isEmpty(node.points) then
+		-- If there are still Points inside the node, update the reference for each of the Points
 		for index, point in node.points do
 			local newReference = self.references[point.id]
 			newReference[#newReference] = index
 		end
 	elseif node.parent then
+		-- If the node is empty, and the node isn't the root node, destroy it
 		self:DestroyNode(node)
 	end
 end
@@ -238,21 +258,28 @@ function QuadTree.UpdatePoint(self: Class, point: Point, _node: Node?, _ref: { n
 	if not reference then
 		return
 	end
-	reference = Sift.Array.copy(reference)
+	reference = Sift.Array.copy(reference) -- Copied for easier modification
 
 	local node: Node = _node or self:GetFromId(id)
 
 	if self.references[id] then
+		-- This means that the reference still contains node.points index
+		-- Remove it from the reference table
 		reference = Sift.Array.pop(reference)
 
+		-- And also remove it from the tree, to be re-inserted later
 		self:Remove(id, node)
 	end
 
 	if (node.branch or node.points) and (self:InBoundary(point.position, node)) then
+		-- Found a node that isn't destroyed by self:Remove()
+		-- and which the point is inside of its Boundary
+		-- Insert the Point into this node
 		self.references[id] = reference
 
 		return self:Insert(point, node)
 	else
+		-- This node has been destroyed, keep going up
 		reference = Sift.Array.pop(reference, 2)
 
 		return self:UpdatePoint(point, node.parent, reference)
@@ -265,6 +292,7 @@ function QuadTree.GetFromId(self: Class, id: string)
 		return
 	end
 
+	-- Drill down the QuadTree
 	local point: Point
 	local node: Node = self.tree
 	local lastIndex: number?
@@ -299,6 +327,8 @@ function QuadTree.GetFromId(self: Class, id: string)
 	return node, point
 end
 
+-- MATH TERRITORY --
+
 function QuadTree.InBoundary(self: Class, p: Vector2, boundary: Boundary)
 	return (p.X >= boundary.topLeft.X)
 		and (p.X <= boundary.bottomRight.X)
@@ -322,6 +352,8 @@ function QuadTree.IntersectsBoundary(self: Class, boundary1: Boundary, boundary2
 
 	return (a.x1 < b.x2) and (b.x1 < a.x2) and (a.y1 > b.y2) and (b.y1 > a.y2)
 end
+
+-- UTILITY QUERIES --
 
 function QuadTree.FindPointsInBoundary(self: Class, boundary: Boundary, _node: Node?, _results: { Point }?): { Point }
 	local results = _results
