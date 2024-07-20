@@ -18,10 +18,6 @@ local ROTATION_PER_SECOND = 45
 
 local function SelectedFX(world: Matter.World)
 	for _, _, highlight: Components.Highlight in world:query(Selected, Highlight) do
-		if SurfaceGuiEffects.Tweens[highlight.part] then
-			continue
-		end
-
 		local dt = Matter.useDeltaTime()
 
 		local rx, ry, rz = highlight.part.CFrame:ToOrientation()
