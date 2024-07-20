@@ -6,28 +6,34 @@ local Squash = require(ReplicatedStorage.Packages.Squash)
 local Components = require(ReplicatedStorage.Shared.Components)
 local RemoteEvent = ReplicatedStorage.MatterRemote
 
-local function deserializeComponent(componentName: string, serializedComponent: { [any]: string }): { [any]: any }
-	if Sift.Array.is(serializedComponent) then
-		local dataType = typeof(Components[componentName]()[1])
+local function deserializeComponent(
+	componentName: string,
+	serializedComponent: { [any]: string | { string } }
+): { [any]: any }
+	local component: Components.Component<any> = Components[componentName]()
+
+	return Sift.Dictionary.map(serializedComponent, function(value, key)
+		local dataType = typeof(component[key])
+
 		if dataType == "string" then
-			return serializedComponent
-		end
-
-		return Sift.Array.map(serializedComponent, function(value: string)
-			return Squash[dataType].des(value)
-		end)
-	else
-		local component: Components.Component<any> = Components[componentName]()
-
-		return Sift.Dictionary.map(serializedComponent, function(value: string, key)
-			local dataType = typeof(component[key])
-			if dataType == "string" then
+			return value
+		elseif dataType == "table" then
+			if not Sift.Array.is(value) then
 				return value
 			end
 
-			return Squash[dataType].des(value)
-		end)
-	end
+			local arrayDataType = typeof(Components[componentName]()[key][1])
+			if arrayDataType == "string" then
+				return value
+			end
+
+			return Sift.Array.map(value, function(arrayValue: string)
+				return Squash[arrayDataType].des(arrayValue)
+			end)
+		end
+
+		return Squash[dataType].des(value)
+	end)
 end
 
 local function receiveReplication(world: Matter.World)
