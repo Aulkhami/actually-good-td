@@ -226,7 +226,7 @@ function QuadTree.Remove(self: Class, id: string, _node: Node?)
 			local newReference = self.references[point.id]
 			newReference[#newReference] = index
 		end
-	else
+	elseif node.parent then
 		self:DestroyNode(node)
 	end
 end
