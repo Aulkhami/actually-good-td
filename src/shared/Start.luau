@@ -6,15 +6,19 @@ local Plasma = require(ReplicatedStorage.Packages.Plasma)
 local Rewire = require(ReplicatedStorage.Packages.Rewire)
 local Signal = require(ReplicatedStorage.Packages.Signal)
 local Types = require(ReplicatedStorage.Types)
+local QuadTree = require(ReplicatedStorage.Utility.QuadTree)
 local HotReloader = Rewire.HotReloader
 
-local function start(containers)
+local function start(containers, worldConfig: { topLeft: Vector2, bottomRight: Vector2 })
 	local world = Matter.World.new()
 	local state: Types.GlobalState = {
 		debugEnabled = false,
 		gameStateUiState = {
 			displayed = table.create(5),
 		},
+
+		towerQuadTree = QuadTree.new(worldConfig.topLeft, worldConfig.bottomRight),
+		mobQuadTree = QuadTree.new(worldConfig.topLeft, worldConfig.bottomRight),
 	}
 
 	local debugger = Matter.Debugger.new(Plasma)
