@@ -5,15 +5,17 @@ local Squash = require(ReplicatedStorage.Packages.Squash)
 
 local function SerializeDeep(table: { [any]: any }): { [any]: any }
 	local function mapper(value: any)
-		if typeof(value) == "table" then
+		local valueType = typeof(value)
+
+		if valueType == "table" then
 			return SerializeDeep(value)
 		end
 
-		if typeof(value) == "string" then
+		if valueType == "string" then
 			return value
 		end
 
-		return Squash[typeof(value)].ser(value)
+		return Squash[valueType].ser(value)
 	end
 
 	if Sift.Array.is(table) then
