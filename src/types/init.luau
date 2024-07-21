@@ -1,6 +1,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Matter = require(ReplicatedStorage.Packages.Matter)
+local QuadTree = require(ReplicatedStorage.Utility.QuadTree)
 
 -- Mobs
 export type Mob = {
@@ -63,6 +64,9 @@ export type GameStateUiState = {
 export type GlobalState = {
 	gameStateUiState: GameStateUiState,
 	debugEnabled: boolean,
+
+	towerQuadTree: QuadTree.Class,
+	mobQuadTree: QuadTree.Class,
 }
 
 -- Instance types
