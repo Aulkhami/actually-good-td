@@ -10,6 +10,9 @@
       "Shared": {
         "$path": "src/shared"
       },
+      "Network": {
+        "$path": "src/network"
+      },
       "Utility": {
         "$path": "src/utility"
       },
