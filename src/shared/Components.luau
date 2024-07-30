@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Matter = require(ReplicatedStorage.Packages.Matter)
 local Types = require(ReplicatedStorage.Types)
+local EnumList = require(ReplicatedStorage.Types.EnumList)
 
 type PartialNewData<T> = { [any]: any } & T
 
@@ -105,6 +106,8 @@ Components.Mob = Matter.component("Mob", {} :: Mob)
 -- Path
 type raw_Path = {
 	current: number,
+	currentProgress: number,
+
 	path: number,
 }
 export type Path = raw_Path & Component<raw_Path>
@@ -112,6 +115,8 @@ Components.Path = Matter.component(
 	"Path",
 	{
 		current = 1,
+		currentProgress = 0,
+
 		path = 1,
 	} :: raw_Path
 ) :: Constructor<raw_Path>
@@ -207,6 +212,42 @@ Components.Size = Matter.component(
 		size = 5,
 	} :: Size
 ) :: Constructor<raw_Size>
+
+-- AttackPriority
+type raw_AttackPriority = {
+	priority: EnumList.AttackPriority,
+}
+export type AttackPriority = raw_AttackPriority & Component<raw_AttackPriority>
+Components.AttackPriority = Matter.component(
+	"AttackPriority",
+	{
+		priority = "First" :: EnumList.AttackPriority,
+	} :: AttackPriority
+) :: Constructor<raw_AttackPriority>
+
+-- Damage
+type raw_Damage = {
+	from: { number },
+}
+export type Damage = raw_Damage & Component<raw_Damage>
+Components.Damage = Matter.component(
+	"Damage",
+	{
+		from = {},
+	} :: Damage
+) :: Constructor<raw_Damage>
+
+-- AttackCooldown
+type raw_AttackCooldown = {
+	clearTime: number,
+}
+export type AttackCooldown = raw_AttackCooldown & Component<raw_AttackCooldown>
+Components.AttackCooldown = Matter.component(
+	"AttackCooldown",
+	{
+		clearTime = 0,
+	} :: AttackCooldown
+) :: Constructor<raw_AttackCooldown>
 
 -- GhostPlacement
 export type GhostPlacement = {}

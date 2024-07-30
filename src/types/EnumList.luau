@@ -1,3 +1,5 @@
+export type AttackPriority = "First" | "Last" | "Strongest" | "Weakest" | "Nearest" | "Furthest" | "Random"
+
 return {
 	Priority = {
 		Deletion = 100 ^ 0,
