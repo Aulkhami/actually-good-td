@@ -124,7 +124,7 @@ function SurfaceGuiEffects.GetRangeVisual(position: Vector3, range: number)
 		part,
 		rangeVisualTweenInfo,
 		{
-			Size = Vector3.new(0.1, range, range),
+			Size = Vector3.new(0.1, range * 2, range * 2),
 		} :: any & Part
 	)
 
