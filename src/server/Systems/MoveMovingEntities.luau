@@ -73,6 +73,7 @@ local function MoveMovingEntities(world: Matter.World)
 		if position.position.Position == currentWaypoint then
 			newPath = newPath:patch({
 				current = newPath.current + 1,
+				currentProgress = 0,
 			})
 			world:insert(id, newPath)
 
@@ -100,10 +101,17 @@ local function MoveMovingEntities(world: Matter.World)
 		local moveDirection = (currentWaypoint - currentCF.Position).Unit
 		local moveVector = moveDirection * math.clamp(speed.speed * Matter.useDeltaTime(), 0, distance)
 
+		-- Get current path progress
+		local lastWaypoint = pathArray[newPath.current - 1] or currentWaypoint
+		local progress = distance / (currentWaypoint - lastWaypoint).Magnitude
+
 		newPosition = newPosition:patch({
 			position = currentCF + moveVector,
 		})
-		world:insert(id, newPosition)
+		newPath = newPath:patch({
+			currentProgress = progress,
+		})
+		world:insert(id, newPosition, newPath)
 	end
 end
 
