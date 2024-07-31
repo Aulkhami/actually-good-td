@@ -37,7 +37,7 @@ local function UpdateQuadTree(world: Matter.World, state: Types.GlobalState)
 		end
 
 		local point = {
-			position = Vector2.new(positionComp.position.X, positionComp.position.Y),
+			position = Vector2.new(positionComp.position.X, positionComp.position.Z),
 			id = strId,
 		}
 
